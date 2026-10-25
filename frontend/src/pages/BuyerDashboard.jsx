@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import API from "../api";
+import API, { getAssetUrl } from "../api";
 import "./BuyerDashboard.css";
 import ProfileGreeting from "../ProfileGreeting";
 import LogoutButton from "../LogoutButton";
@@ -77,9 +77,7 @@ const BuyerDashboard = () => {
   const getImageUrl = (auction) => {
     const image = auction?.productId?.images?.[0];
     if (!image) return null;
-    return image.startsWith("http")
-      ? image
-      : `http://localhost:5000/${image.replace(/^\/+/, "")}`;
+    return getAssetUrl(image);
   };
 
   const activeBids = [];

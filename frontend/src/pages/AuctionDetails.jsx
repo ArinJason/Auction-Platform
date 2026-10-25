@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import API from "../api";
+import API, { getAssetUrl } from "../api";
 import "./AuctionDetails.css";
 import ProfileGreeting from "../ProfileGreeting";
 import LogoutButton from "../LogoutButton";
@@ -57,11 +57,7 @@ const AuctionDetails = () => {
 
   const image = product?.images?.[0];
 
-  const imageUrl = image
-    ? image.startsWith("http")
-      ? image
-      : `http://localhost:5000/${image.replace(/^\/+/, "")}`
-    : null;
+  const imageUrl = getAssetUrl(image);
 
   const currentBid =
     auction.highestBid ??

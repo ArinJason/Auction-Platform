@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import API from "../api";
+import { useEffect, useState } from "react";
+import API, { getAssetUrl } from "../api";
 import "./PublicLanding.css";
 import { Link } from "react-router-dom";
 import ProfileGreeting from "../ProfileGreeting";
@@ -33,10 +33,7 @@ const PublicLanding = () => {
 
     if (!image) return null;
 
-    // Support both full URLs and paths stored by the backend.
-    if (image.startsWith("http")) return image;
-
-    return `http://localhost:5000/${image.replace(/^\/+/, "")}`;
+    return getAssetUrl(image);
   };
 
   const getProductTitle = (auction) =>
@@ -128,7 +125,7 @@ const PublicLanding = () => {
       <section className="hero">
         <div className="banner">
           <img
-            src="http://localhost:5000/uploads/auction.jpg"
+            src={getAssetUrl("uploads/auction.jpg")}
             alt="AuctionX Banner"
           />
         </div>

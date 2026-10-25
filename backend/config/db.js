@@ -1,14 +1,14 @@
+const dns = require('dns');
 const mongoose = require('mongoose');
 
-const connectDB = async () =>{
-    try{
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log("MongoDB connected");
+if (process.env.RENDER !== 'true') {
+    dns.setServers(['1.1.1.1']);
+}
 
-    } catch(err){
-        console.error(err.message);
-        process.exit(1);
-    }
-
+const connectDB = async () => {
+    await mongoose.connect(process.env.MONGO_URI);
+    const isAtlas = process.env.MONGO_URI.startsWith('mongodb+srv://');
+    console.log(isAtlas ? 'Connected to MongoDB Atlas' : 'Connected to MongoDB');
 };
+
 module.exports = connectDB;

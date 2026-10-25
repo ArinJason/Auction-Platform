@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import API from "../api";
+import API, { getAssetUrl } from "../api";
 import "./BrowseAuctions.css";
 import ProfileGreeting from "../ProfileGreeting";
 import LogoutButton from "../LogoutButton";
@@ -37,7 +37,7 @@ const BrowseAuctions = () => {
     if (!image) return null;
     if (image.startsWith("http")) return image;
 
-    return `http://localhost:5000/${image.replace(/^\/+/, "")}`;
+    return getAssetUrl(image);
   };
 
   const getProductTitle = (auction) =>

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginRegister.css";
 import LogoutButton from "../LogoutButton";
+import { API_ORIGIN } from "../api";
 
 const LoginRegister = () => {
   const [role, setRole] = useState("buyer");
@@ -29,7 +30,7 @@ const LoginRegister = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post(`${API_ORIGIN}/api/auth/register`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,

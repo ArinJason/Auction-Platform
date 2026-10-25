@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./AddListing.css";
 import LogoutButton from "../LogoutButton";
+import { API_ORIGIN } from "../api";
 
 const AddListing = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ const AddListing = () => {
     try {
       // ✅ Call backend API to create auction (not listings)
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:5000/api/auctions", formData, {
+      await axios.post(`${API_ORIGIN}/api/auctions`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
